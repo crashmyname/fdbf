@@ -5,7 +5,7 @@ class SessionMiddleware {
     public static function start() {
         if (session_status() === PHP_SESSION_NONE) {
             ini_set('session.cookie_samesite','None');
-            ini_set('session.cookie_secure',true);
+            ini_set('session.cookie_secure',false);
             session_start([
                 'cookie_lifetime' => 86400,
                 'cookie_secure' => false,
