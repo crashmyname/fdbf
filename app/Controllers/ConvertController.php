@@ -20,16 +20,15 @@ class ConvertController extends BaseController
     // Controller logic here
     public function convert(Request $request)
     {
-        // vd($request->all());
         if ($request->file('excelFile')) {
             $uploadDir = __DIR__ . '/uploads/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
-            $fileName = basename($_FILES['excelFile']['name']);
+            $fileName = $request->getClientOriginalName('excelFile');
             $uploadFile = $uploadDir . $fileName;
     
-            if (!move_uploaded_file($_FILES['excelFile']['tmp_name'], $uploadFile)) {
+            if (!move_uploaded_file($request->getPath('excelFile'), $uploadFile)) {
                 die("Error saat mengupload file.");
             }
     
